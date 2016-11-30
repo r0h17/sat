@@ -1,0 +1,44 @@
+<h1><span class="blue">&lt;</span>Hi<span class="blue">&gt;</span> <span class="yellow">{{vm.user.firstName}}</pan>!</h1>
+<h2>Test Grades</h2>
+<table class = "table table-hover table-bordered">
+    <thead>
+       <th> Id </th>
+       <th> Date </th>
+       <th> Course Name </th>
+       <th> Exam </th>
+       <th> Grade </th>
+   </thead>
+   <tbody>
+    <tr ng-repeat="grade in vm.testGrades">
+     <td>{{grade.id}}</td>
+     <td>{{grade.test.date}}</td>
+     <td>{{grade.test.courses.courseName}}</td>
+     <td>{{grade.test.courses.exam.examName}}</td>
+     <td>{{grade.grade}}</td>
+    </tr>
+   </tbody>
+</table>
+<p>&nbsp;</p>
+<!--<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+  Enroll Test
+</button>-->
+<a href="#/login" class="btn btn-default btn-lg logout">Logout</a>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.enrollTest()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

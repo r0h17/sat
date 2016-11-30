@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="1" author="ipedrazas">
+		<createTable tableName="pings">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="remote_ip" type="varchar(15)" />
+
+			<column name="ping_tstamp" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="2" author="rnaicker">
+		<createTable tableName="users">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="username" type="varchar(200)">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="password" type="varchar(30)"/>
+			<column name="first_name" type="varchar(55)"/>
+			<column name="last_name" type="varchar(55)"/>
+
+		</createTable>
+		<createTable tableName="roles">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="role_name" type="varchar(50)">
+				<constraints unique="true" nullable="false"/>
+			</column>
+		</createTable>
+		<insert tableName="roles">
+			<column name="role_name" value="TEACHER"></column>
+		</insert>
+		<insert tableName="roles">
+			<column name="role_name" value="STUDENT"></column>
+		</insert>
+
+		<createTable tableName="user_roles">
+			<column name="user_id" type="bigint"/>
+			<column name="role_id" type="bigint"/>
+		</createTable>
+		<addPrimaryKey tableName="user_roles" columnNames="user_id"/>
+		<addForeignKeyConstraint baseColumnNames="role_id"
+								 baseTableName="user_roles"
+								 constraintName="fk_role_name"
+								 referencedColumnNames="id"
+								 referencedTableName="roles" onDelete="CASCADE" onUpdate="CASCADE"/>
+		<addForeignKeyConstraint baseColumnNames="user_id"
+								 baseTableName="user_roles"
+								 constraintName="fk_user_id"
+								 referencedColumnNames="id"
+								 referencedTableName="users" onDelete="CASCADE" onUpdate="CASCADE"/>
+		<insert tableName="users">
+			<column name="username">teacher1@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Teacher</column>
+			<column name="last_name">One</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">teacher2@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Teacher</column>
+			<column name="last_name">Two</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">teacher3@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Teacher</column>
+			<column name="last_name">Three</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">teacher4@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Teacher</column>
+			<column name="last_name">Four</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">1</column>
+			<column name="role_id">1</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">2</column>
+			<column name="role_id">1</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">3</column>
+			<column name="role_id">1</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">4</column>
+			<column name="role_id">1</column>
+		</insert>
+
+		<insert tableName="users">
+			<column name="username">student1@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">One</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student2@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Two</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student3@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Three</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student4@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Four</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student5@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Five</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student6@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Six</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student7@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Seven</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student8@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Eight</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="users">
+			<column name="username">student9@sat.com</column>
+			<column name="password">test</column>
+			<column name="first_name">Student</column>
+			<column name="last_name">Nine</column>
+			<column name="password">test</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">5</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">6</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">7</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">8</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">9</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">10</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">11</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">12</column>
+			<column name="role_id">2</column>
+		</insert>
+		<insert tableName="user_roles">
+			<column name="user_id">13</column>
+			<column name="role_id">2</column>
+		</insert>
+	</changeSet>
+	<changeSet id="3" author="rnaicker">
+		<createTable tableName="exam">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="exam_name" type="varchar(200)">
+				<constraints unique="true" nullable="false" />
+			</column>
+		</createTable>
+		<insert tableName="exam">
+			<column name="exam_name">SAT</column>
+		</insert>
+		<createTable tableName="courses">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="exam_id" type="bigint">
+			</column>
+			<column name="course_name" type="varchar(100)">
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="exam_id"
+								 baseTableName="courses"
+								 constraintName="fk_exam_name"
+								 referencedColumnNames="id"
+								 referencedTableName="exam"/>
+		<insert tableName="courses">
+			<column name="course_name">English</column>
+			<column name="exam_id">1</column>
+		</insert>
+		<insert tableName="courses">
+			<column name="course_name">Maths</column>
+			<column name="exam_id">1</column>
+		</insert>
+		<createTable tableName="practice_tests">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="course_id" type="bigint"/>
+			<column name="created_by" type="bigint"/>
+			<column name="date" type="date"/>
+		</createTable>
+		<addForeignKeyConstraint baseTableName="practice_tests"
+								 baseColumnNames="course_id"
+								 constraintName="fk_course_id"
+								 referencedTableName="courses"
+								 referencedColumnNames="id"/>
+		<addForeignKeyConstraint baseColumnNames="created_by"
+								 baseTableName="practice_tests"
+								 constraintName="fk_user_id_pt"
+								 referencedColumnNames="id"
+								 referencedTableName="users" onDelete="CASCADE" onUpdate="CASCADE"/>
+		<addUniqueConstraint tableName="practice_tests" columnNames="course_id, created_by, date"/>
+		<createTable tableName="grades">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="test_id" type="bigint">
+			</column>
+			<column name="user_id" type="bigint"/>
+			<column name="grade" type="double"/>
+		</createTable>
+		<addForeignKeyConstraint baseTableName="grades"
+								 baseColumnNames="test_id"
+								 constraintName="fk_test_id"
+								 referencedTableName="practice_tests"
+								 referencedColumnNames="id"/>
+		<addForeignKeyConstraint baseColumnNames="user_id"
+								 baseTableName="grades"
+								 constraintName="fk_user_id_grade"
+								 referencedColumnNames="id"
+								 referencedTableName="users" onDelete="CASCADE" onUpdate="CASCADE"/>
+
+	</changeSet>
+
+</databaseChangeLog>
+

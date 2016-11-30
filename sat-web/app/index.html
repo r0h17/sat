@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/bootstrap/bootstrap.min.css">
+
+
+  <!--<link rel="stylesheet" href="app.css"/>
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"/>
+  <link href="https://necolas.github.io/normalize.css/5.0.0/normalize.css" rel="stylesheet"/>
+-->
+  <!--<link rel="stylesheet" href="solarized-light-min.css"/>-->
+  <link rel="stylesheet" href="bootstrap-solarized-light.css"/>
+</head>
+<body>
+
+
+      <div class="container">
+          <div class="col-sm-8 col-sm-offset-2">
+              <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+              <div ng-view></div>
+          </div>
+      </div>
+
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>-->
+  <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="//code.angularjs.org/1.2.20/angular.js"></script>
+  <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
+  <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <script src="app.js"></script>
+  <script src="services/authentication.service.js"></script>
+  <script src="services/flash.service.js"></script>
+  <script src="services/grades.service.js"></script>
+
+  <!-- Real user service that uses an api -->
+  <script src="services/user.service.js"></script>
+
+  <!-- Fake user service for demo that uses local storage -->
+  <!--<script src="services/user.service.local-storage.js"></script>-->
+
+  <script src="home/home.controller.js"></script>
+  <script src="student/student.controller.js"></script>
+  <script src="login/login.controller.js"></script>
+  <script src="register/register.controller.js"></script>
+  <script src="grades/grades.controller.js"></script>
+</body>
+</html>

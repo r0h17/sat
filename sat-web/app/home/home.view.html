@@ -1,0 +1,127 @@
+<h1><span class="blue">&lt;</span>Hi<span class="blue">&gt;</span> <span class="yellow">{{vm.user.firstName}} {{vm.user.lastName}}</pan>!</h1>
+<h2>Practice Tests</h2>
+<table class = "table table-hover table-bordered">
+    <thead>
+       <th> Id </th>
+       <th> Date </th>
+       <th> Course Name </th>
+       <th> Exam </th>
+       <th> Action </th>
+   </thead>
+   <tbody>
+    <tr ng-repeat="test in vm.practiceTests">
+     <td>{{$index+1}}</td>
+     <td>{{test.date}}</td>
+     <td>{{test.courses.courseName}}</td>
+     <td>{{test.courses.exam.examName}}</td>
+     <td>
+      <button type="button" class="btn btn-default" ng-click="vm.enterGrades(test.id)">Enter Grades</button>
+      <button type="button" class="btn btn-danger" ng-click="vm.deleteTest(test.id)">Delete</button>
+     </td>
+    </tr>
+   </tbody>
+</table>
+<div ng-hide="vm.practiceTests.length">No items found</div>
+
+<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+  Schedule Exam
+</button>
+<a href="#/login" class="btn btn-default btn-lg logout">Logout</a>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form name="form" ng-submit="vm.addSchedule()" role="form">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Create Practice Test</h4>
+        </div>
+        <div class="modal-body">
+
+
+            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+              <label for="examType">Exam Type</label>
+              <select class="form-control" id="examType" name="examType" ng-model="vm.schedule.examType" ng-change="vm.getAllCourses(vm.schedule.examType)">
+                <option value="-1" label="Select Exam"/>
+                <option ng-repeat="exam in vm.exams" value="{{exam.id}}">{{exam.examName}}</option>
+              </select>
+              <!--<select ng-model="examType" ng-options="exam as exam.examName for exam in vm.exams" ng-change="logResult()"></select>-->
+              <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+              <label for="examType">Course Name</label>
+              <select class="form-control" id="courseName" name="courseName" ng-model="vm.schedule.courseName">
+                <option ng-repeat="course in vm.courses" value="{{course.id}}">{{course.courseName}}</option>
+              </select>
+              <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                <label for="username">Test Date</label>
+                <input type="date" name="examDate" id="examDate" class="form-control" ng-model="vm.schedule.examDate" required />
+                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Date is required</span>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <div class="form-actions">
+
+              <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Save changes</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="enterGradesModal" tabindex="-1" role="dialog" aria-labelledby="enterGradesModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="enterGradesModalLabel">Enter Student Grades</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form" ng-submit="vm.submitGrades()" role="form">
+
+          <table class = "table table-hover table-bordered">
+              <thead>
+                 <th> Id </th>
+                 <th> Student Name </th>
+                 <th> Course Name </th>
+                 <th> Exam </th>
+                 <th> Date </th>
+                 <th> Grade </th>
+                 <th> Action </th>
+             </thead>
+             <tbody>
+              <tr ng-repeat="student in vm.availableStudents">
+               <td>{{test.id}}</td>
+               <td>{{test.date}}</td>
+               <td>{{test.courseName}}</td>
+               <td>{{test.exam}}</td>
+               <td>
+                 <a href="#">
+                   <span class="glyphicon glyphicon-ok"></span>
+                 </a>
+                 <a href="#">
+                   <span class="glyphicon glyphicon-trash"></span>
+                 </a>
+               </td>
+              </tr>
+             </tbody>
+          </table>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.addSchedule()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

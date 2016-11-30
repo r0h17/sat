@@ -1,0 +1,44 @@
+<h1><span class="blue">&lt;</span>Hi<span class="blue">&gt;</span> <span class="yellow">{{vm.user.firstName}} {{vm.user.lastName}}</pan>!</h1>
+<h2>Enter Grades for test {{vm.test.courses.courseName}}</h2>
+<table class = "table table-hover table-bordered">
+    <thead>
+      <th> Id </th>
+      <th> Student Name </th>
+      <th> Course Name </th>
+      <th> Exam </th>
+      <th> Date </th>
+      <th> Grade </th>
+      <th> Action </th>
+   </thead>
+   <tbody>
+    <tr ng-repeat="grade in vm.grades" ng-include="vm.getTemplate(grade)">
+    <script type="text/ng-template" id="display">
+       <td>{{$index+1}}</td>
+       <td>{{grade.firstName}} {{grade.lastName}}</td>
+       <td>{{grade.courseName}}</td>
+       <td>{{grade.examName}}</td>
+       <td>{{grade.date}}</td>
+       <td>{{grade.grade}}</td>
+       <td>
+        <button type="button" class="btn btn-primary" ng-click="vm.editGrade(grade)">Edit</button>
+       </td>
+    </script>
+    <script type="text/ng-template" id="edit">
+       <td>{{$index+1}}</td>
+       <td>{{grade.firstName}} {{grade.lastName}}</td>
+       <td>{{grade.courseName}}</td>
+       <td>{{grade.examName}}</td>
+       <td>{{grade.date}}</td>
+       <td><input type="text" ng-model=grade.grade class="form-control input-sm"/></td>
+       <td>
+         <button type="button" class="btn btn-primary" ng-click="vm.updateUserGrade(grade)">Save</button>
+		     <button type="button" class="btn btn-danger" ng-click="vm.reset()">Cancel</button>
+       </td>
+    </script>
+    </tr>
+
+   </tbody>
+</table>
+
+<a href="#/" class="btn btn-default btn-lg logout">Back</a>
+<a href="#/login" class="btn btn-default btn-lg logout">Logout</a>
