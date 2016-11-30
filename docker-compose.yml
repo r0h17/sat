@@ -6,7 +6,7 @@ services:
             - "25:25"
     #smtp:
     #  image: python
-    #  command: python -m smtpd -n -c DebuggingServer localhost:25
+    #  command: python -m smtpd -n -c DebuggingServer 0.0.0.0:25
     #  ports:
     #    - "25:25"
     db:
@@ -23,17 +23,16 @@ services:
 #        image: "rabbitmq:management"
 #        hostname: "rmq"
 #        ports:
-#            - '15672:15672'  
+#            - '15672:15672'
     app:
         build: sat-app/.
         ports:
             - "8080:8080"
         environment:
             APP_DB_HOST: db:3306
-            APP_RMQ_HOST: rmq
+            APP_WEB_HOST: web
             APP_SMTP_HOST: smtp
         depends_on:
-            - "rmq"
             - "smtp"
             - "db"
     web:

@@ -1,0 +1,47 @@
+# Database settings.
+database:
+  # the name of the JDBC driver, mysql in our case
+  driverClass: com.mysql.jdbc.Driver
+  # the username
+  user: dev
+  # the password
+  password: 123456
+  # the JDBC URL; the database is called DWGettingStarted
+  url: jdbc:mysql://${APP_DB_HOST}/myapp
+
+smtpHost: ${APP_SMTP_HOST}
+smtpPort: 25
+template: |
+  Hello $${firstName},
+    Your marks has been publish for the test $${testName} held on $${date}. Your score is $${grade}.
+    Your Can login to the app to view your score history.
+  Thank you,
+  Admin
+
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.example.app' to DEBUG.
+    com.sch.sat: INFO
+    #org.hibernate.SQL: DEBUG
+    #org.hibernate.type: TRACE
+
+  appenders:
+    - type: console
+      target: stdout
+      threshold: ALL
+      timeZone: UTC
+
+    - type: file
+      currentLogFilename: ./logs/sat-app.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: ./logs/sat-app-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
+      logFormat:  "%-5level [%d{yyyy-dd-mm HH:mm:ss.SSS}] [%thread] %logger - %msg%n"

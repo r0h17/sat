@@ -5,7 +5,7 @@
 
 FROM java:8
 
-ADD target/sat-0.0.1-SNAPSHOT.jar /app/sat.jar
+ADD target/sat-*-SNAPSHOT.jar /app/sat.jar
 ADD configuration.yml /app/configuration.yml
 
 WORKDIR /app
